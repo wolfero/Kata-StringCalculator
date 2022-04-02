@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -43,5 +44,12 @@ public class StringCalculatorShould {
         int result = stringCalculator.sumElements("1,a,2");
 
         assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    void given_elements_with_separator_and_new_lines_return_sum_of_elements() {
+        int result = stringCalculator.sumElements("1\n2,3");
+
+        assertThat(result).isEqualTo(6);
     }
 }

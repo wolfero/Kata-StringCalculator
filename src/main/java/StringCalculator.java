@@ -19,10 +19,13 @@ public class StringCalculator {
         return separateElements()
                 .filter(this::isNumber)
                 .mapToInt(Integer::parseInt)
+                .peek(number -> {
+                    if (number < 0) throw new IllegalArgumentException("Negatives not allowed:");
+                })
                 .sum();
     }
 
-    private boolean isNumber (String element) {
+    private boolean isNumber(String element) {
         try {
             Integer.parseInt(element);
             return true;

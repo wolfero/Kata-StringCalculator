@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -35,7 +36,7 @@ public class StringCalculatorShould {
     }
 
     @ParameterizedTest
-    @CsvSource(value={
+    @CsvSource(value = {
             "'1,2'_ 3"
     }, delimiter = '_')
     void given_elements_with_separator_return_sum_of_elements(String input, int output) {
@@ -45,7 +46,7 @@ public class StringCalculatorShould {
     }
 
     @ParameterizedTest
-    @CsvSource(value={
+    @CsvSource(value = {
             "'1,a,2'_ 3"
     }, delimiter = '_')
     void given_numeric_and_not_numeric_elements_with_separator_return_sum_of_numeric_elements(String input, int output) {
@@ -55,7 +56,7 @@ public class StringCalculatorShould {
     }
 
     @ParameterizedTest
-    @CsvSource(value={
+    @CsvSource(value = {
             "'1\n2,3'_ 6"
     }, delimiter = '_')
     void given_elements_with_separator_and_new_lines_return_sum_of_elements(String input, int output) {
@@ -65,7 +66,7 @@ public class StringCalculatorShould {
     }
 
     @ParameterizedTest
-    @CsvSource(value={
+    @CsvSource(value = {
             "'//;\n1;2'_ 3"
     }, delimiter = '_')
     void given_elements_with_different_separator_and_new_lines_return_sum_of_elements(String input, int output) {
@@ -75,9 +76,9 @@ public class StringCalculatorShould {
     }
 
     @Test
-    void given_negative_elements_throw_exception(){
-        assertThrows(IllegalArgumentException.class,()->{
-            stringCalculator.add("-1,-2,-3");
+    void given_negative_elements_throw_exception() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            stringCalculator.add("-1,2,3");
         });
     }
 }

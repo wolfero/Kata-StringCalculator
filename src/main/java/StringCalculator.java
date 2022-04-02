@@ -2,12 +2,12 @@ public class StringCalculator {
     private final String separator = ",|\n";
     private final int zero = 0;
 
-    public int sumElements(String givenText) {
+    public int add(String givenText) {
         if (isEmpty(givenText)) return zero;
-        return doSum(separateElements(givenText));
+        return sumElements(separateElements(givenText));
     }
 
-    private int doSum(String[] separateElements) {
+    private int sumElements(String[] separateElements) {
         int result = 0;
         for (String element : separateElements) {
             result += parseStringToInt(element);

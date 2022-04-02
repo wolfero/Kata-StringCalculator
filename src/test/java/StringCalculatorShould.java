@@ -28,4 +28,12 @@ public class StringCalculatorShould {
         assertThat(result).isEqualTo(1);
     }
 
+    @Test
+    void given_elements_with_separator_return_sum_of_elements() {
+        StringCalculator stringCalculator = new StringCalculator();
+
+        int result = stringCalculator.sumElements("1,2");
+
+        assertThat(result).isEqualTo(0);
+    }
 }

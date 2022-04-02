@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class StringCalculatorShould{
+public class StringCalculatorShould {
     /*TODO
      *   given "" return 0
      *   given "abc" return 0
@@ -11,19 +11,19 @@ public class StringCalculatorShould{
      */
 
     @Test
-    void given_empty_element_return_not_sum(){
+    void given_empty_element_return_not_sum() {
         StringCalculator stringCalculator = new StringCalculator();
 
-        int result=stringCalculator.sumElements("");
+        int result = stringCalculator.sumElements("");
 
         assertThat(result).isEqualTo(0);
     }
 
     @Test
-    void given_element_with_not_separator_return_same_element(){
+    void given_element_with_not_separator_return_same_element() {
         StringCalculator stringCalculator = new StringCalculator();
 
-        int result=stringCalculator.sumElements("1");
+        int result = stringCalculator.sumElements("1");
 
         assertThat(result).isEqualTo(1);
     }

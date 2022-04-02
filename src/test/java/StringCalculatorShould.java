@@ -37,4 +37,11 @@ public class StringCalculatorShould {
 
         assertThat(result).isEqualTo(3);
     }
+
+    @Test
+    void given_numeric_and_not_numeric_elements_with_separator_return_sum_of_numeric_elements(){
+        int result = stringCalculator.sumElements("1,a,2");
+
+        assertThat(result).isEqualTo(3);
+    }
 }

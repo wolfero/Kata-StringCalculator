@@ -34,6 +34,6 @@ public class StringCalculatorShould {
 
         int result = stringCalculator.sumElements("1,2");
 
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isEqualTo(3);
     }
 }

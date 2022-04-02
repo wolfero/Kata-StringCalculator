@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class StringCalculator {
     public final String separator = ",";
 
@@ -8,8 +10,17 @@ public class StringCalculator {
     }
 
     private int doSum(String[] separateElements) {
-        return Integer.parseInt(separateElements[0]) + Integer.parseInt(separateElements[1]);
+        int result = 0;
+        for (String element : separateElements) {
+            result += parseStringToInt(element);
+        }
+        return result;
     }
+
+    private int parseStringToInt(String element) {
+        return Integer.parseInt(element);
+    }
+
 
     private String[] separateElements(String givenText) {
         return givenText.split(separator);

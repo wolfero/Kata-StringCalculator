@@ -12,6 +12,10 @@ public class StringCalculatorShould {
 
     @Test
     void given_empty_element_return_not_sum(){
-        assertThat("").isEqualTo(0);
+        assertThat(sumElements("")).isEqualTo(0);
+    }
+
+    public int sumElements(String givenText){
+        return 0;
     }
 }

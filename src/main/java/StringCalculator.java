@@ -1,10 +1,9 @@
-import java.util.Arrays;
-
 public class StringCalculator {
-    public final String separator = ",";
+    private final String separator = ",";
+    private final int intIfError = 0;
 
     public int sumElements(String givenText) {
-        if (isEmpty(givenText)) return 0;
+        if (isEmpty(givenText)) return intIfError;
         if (isContains(givenText)) return doSum(separateElements(givenText));
         return Integer.parseInt(givenText);
     }
@@ -18,13 +17,12 @@ public class StringCalculator {
     }
 
     private int parseStringToInt(String element) {
-        try{
+        try {
             return Integer.parseInt(element);
         } catch (NumberFormatException e) {
-            return 0;
+            return intIfError;
         }
     }
-
 
     private String[] separateElements(String givenText) {
         return givenText.split(separator);

@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class StringCalculatorShould {
+public class StringCalculatorShould{
     /*TODO
      *   given "" return 0
      *   given "abc" return 0
@@ -12,10 +12,11 @@ public class StringCalculatorShould {
 
     @Test
     void given_empty_element_return_not_sum(){
-        assertThat(sumElements("")).isEqualTo(0);
+        StringCalculator stringCalculator = new StringCalculator();
+
+        int result=stringCalculator.sumElements("");
+
+        assertThat(result).isEqualTo(0);
     }
 
-    public int sumElements(String givenText){
-        return 0;
-    }
 }

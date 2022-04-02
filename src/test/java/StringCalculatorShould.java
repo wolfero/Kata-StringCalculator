@@ -19,4 +19,13 @@ public class StringCalculatorShould{
         assertThat(result).isEqualTo(0);
     }
 
+    @Test
+    void given_element_with_not_separator_return_same_element(){
+        StringCalculator stringCalculator = new StringCalculator();
+
+        int result=stringCalculator.sumElements("1");
+
+        assertThat(result).isEqualTo(1);
+    }
+
 }

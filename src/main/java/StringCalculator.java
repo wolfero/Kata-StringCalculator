@@ -18,7 +18,11 @@ public class StringCalculator {
     }
 
     private int parseStringToInt(String element) {
-        return Integer.parseInt(element);
+        try{
+            return Integer.parseInt(element);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
 

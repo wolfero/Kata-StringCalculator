@@ -76,8 +76,6 @@ public class StringCalculatorShould {
 
     @Test
     void given_negative_elements_throw_exception() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            stringCalculator.add("-1,2,3");
-        });
+        assertThrows(IllegalArgumentException.class, () -> stringCalculator.add("-1,2,3"));
     }
 }

@@ -1,5 +1,6 @@
 public class StringCalculator {
     public int sumElements(String givenText) {
-        return 0;
+        if(givenText.isEmpty())return 0;
+        return Integer.parseInt(givenText);
     }
 }

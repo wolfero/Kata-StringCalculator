@@ -1,44 +1,40 @@
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class StringCalculator {
-    private final int zero = 0;
+    private final StringBuilder regex = new StringBuilder("\\n,");
+    private final StringBuilder resutl = new StringBuilder();
 
-    public int add(String givenText) {
-        if (isEmpty(givenText)) return zero;
-        return sumElements(separateElements(givenText));
-    }
-
-    private int sumElements(String[] separateElements) {
-        int result = 0;
-        for (String element : separateElements) {
-            result += parseStringToInt(element);
+    public int add(String input) {
+        if (input.startsWith("//")) {
+            regex.append(input, input.indexOf("//"), input.indexOf("\n"));
+            resutl.append(input.substring(input.indexOf("\n")).trim());
+        } else {
+            resutl.append(input);
         }
-        return result;
+        return sumElements();
     }
 
-    private int parseStringToInt(String element) {
+    private int sumElements() {
+        return separateElements()
+                .filter(this::isNumber)
+                .mapToInt(Integer::parseInt)
+                .sum();
+    }
+
+    private boolean isNumber (String element) {
         try {
-            return Integer.parseInt(element);
+            Integer.parseInt(element);
+            return true;
         } catch (NumberFormatException e) {
-            return zero;
+            return false;
         }
     }
 
-    private String[] separateElements(String givenText) {
-        if(givenText.startsWith("//")){
-            Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(givenText);
-            if (matcher.matches()){
-                String separator=matcher.group(1);
-                String toSplit = matcher.group(2);
-                return toSplit.split(separator);
-            }
-        }
-        return givenText.split(",|\n");
-    }
+    private Stream<String> separateElements() {
+        return Arrays.stream(resutl.toString().split("[" + regex + "]"))
+                .map(String::strip)
+                .filter(element -> !element.isEmpty());
 
-    private boolean isEmpty(String givenText) {
-        MyBoolean myBoolean = new MyBoolean(givenText.isEmpty());
-        return myBoolean.state();
     }
 }

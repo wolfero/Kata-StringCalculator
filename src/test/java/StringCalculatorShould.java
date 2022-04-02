@@ -51,4 +51,11 @@ public class StringCalculatorShould {
 
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    void given_elements_with_different_separator_and_new_lines_return_sum_of_elements() {
+        int result = stringCalculator.add("//;\n1;2");
+
+        assertThat(result).isEqualTo(3);
+    }
 }

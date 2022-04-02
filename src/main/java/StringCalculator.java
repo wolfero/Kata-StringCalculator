@@ -1,5 +1,7 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringCalculator {
-    private final String separator = ",|\n";
     private final int zero = 0;
 
     public int add(String givenText) {
@@ -24,7 +26,15 @@ public class StringCalculator {
     }
 
     private String[] separateElements(String givenText) {
-        return givenText.split(separator);
+        if(givenText.startsWith("//")){
+            Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(givenText);
+            if (matcher.matches()){
+                String separator=matcher.group(1);
+                String toSplit = matcher.group(2);
+                return toSplit.split(separator);
+            }
+        }
+        return givenText.split(",|\n");
     }
 
     private boolean isEmpty(String givenText) {

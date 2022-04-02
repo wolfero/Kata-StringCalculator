@@ -1,11 +1,10 @@
 public class StringCalculator {
-    private final String separator = ",";
-    private final int intIfError = 0;
+    private final String separator = ",|\n";
+    private final int zero = 0;
 
     public int sumElements(String givenText) {
-        if (isEmpty(givenText)) return intIfError;
-        if (isContains(givenText)) return doSum(separateElements(givenText));
-        return Integer.parseInt(givenText);
+        if (isEmpty(givenText)) return zero;
+        return doSum(separateElements(givenText));
     }
 
     private int doSum(String[] separateElements) {
@@ -20,17 +19,12 @@ public class StringCalculator {
         try {
             return Integer.parseInt(element);
         } catch (NumberFormatException e) {
-            return intIfError;
+            return zero;
         }
     }
 
     private String[] separateElements(String givenText) {
         return givenText.split(separator);
-    }
-
-    private boolean isContains(String givenText) {
-        MyBoolean myBoolean = new MyBoolean(givenText.contains(separator));
-        return myBoolean.state();
     }
 
     private boolean isEmpty(String givenText) {

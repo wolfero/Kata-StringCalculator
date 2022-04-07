@@ -27,4 +27,16 @@ public class StringCalculatorShould {
 
         assertThat(result).isEqualTo(output);
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "'1,2',3"
+    })
+    void sum_the_numbers_separated_by_commas(String input,int output){
+        StringCalculator stringCalculator = new StringCalculator();
+
+        int result=stringCalculator.add(input);
+
+        assertThat(result).isEqualTo(output);
+    }
 }

@@ -42,18 +42,22 @@ public class StringCalculator {
         if (restInput.length == 1){
             int number=ignoreNotIntegerNumbers(firstNumber);
             if(negativeNumbers.isEmpty()) return number;
-            String message="";
-            for (int negativeNumber : negativeNumbers){
-                if(message.equals("")){
-                    message="Negatives not allowed: "+ negativeNumber;
-                }else {
-                    message+=", "+negativeNumber;
-                }
-            }
-            throw new IllegalArgumentException(message);
+            throwException();
         }
         String[] rest = Arrays.copyOfRange(restInput, 1, restInput.length);
         return ignoreNotIntegerNumbers(firstNumber) + sum(rest);
+    }
+
+    private void throwException() {
+        StringBuilder message= new StringBuilder();
+        for (int negativeNumber : negativeNumbers){
+            if(message.toString().equals("")){
+                message = new StringBuilder("Negatives not allowed: " + negativeNumber);
+            }else {
+                message.append(", ").append(negativeNumber);
+            }
+        }
+        throw new IllegalArgumentException(message.toString());
     }
 
 

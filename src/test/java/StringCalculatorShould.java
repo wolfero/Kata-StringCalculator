@@ -15,4 +15,16 @@ public class StringCalculatorShould {
 
         assertThat(result).isEqualTo(output);
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "'a',0"
+    })
+    void ignore_all_not_integer_numbers(String input,int output){
+        StringCalculator stringCalculator = new StringCalculator();
+
+        int result=stringCalculator.add(input);
+
+        assertThat(result).isEqualTo(output);
+    }
 }

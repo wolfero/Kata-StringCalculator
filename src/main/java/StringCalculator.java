@@ -4,7 +4,7 @@ import java.util.List;
 
 public class StringCalculator {
     private String separator = "[,\\n]";
-    List<Integer> negativeNumbers= new ArrayList<>();
+    List<Integer> negativeNumbers = new ArrayList<>();
 
     public int add(String input) {
         if (input.isEmpty()) return 0;
@@ -16,18 +16,21 @@ public class StringCalculator {
     }
 
     private String extractCustomSeparator(String input) {
-        if(input.startsWith("//")){
-            String[] storage= input.split("\n");
-            separator=storage[0].substring(storage.length);
-            input =storage[1];
+        if (input.startsWith("//")) {
+            String[] storage = input.split("\n");
+            separator = storage[0].substring(storage.length);
+            if (separator.matches("\\[(.+)\\]")) {
+                separator=separator.substring(1,separator.length()-1);
+            }
+            input = storage[1];
         }
         return input;
     }
 
     private int ignoreNotIntegerNumbers(String input) {
         try {
-            int number=Integer.parseInt(input);
-            if(number<0) {
+            int number = Integer.parseInt(input);
+            if (number < 0) {
                 negativeNumbers.add(number);
                 return 0;
             }
@@ -38,15 +41,15 @@ public class StringCalculator {
     }
 
     private int checkIfIsGreaterThanThousand(int number) {
-        if(number >1000) return 0;
+        if (number > 1000) return 0;
         return number;
     }
 
     private int sum(String[] restInput) {
         String firstNumber = restInput[0];
-        if (restInput.length == 1){
-            int number=ignoreNotIntegerNumbers(firstNumber);
-            if(negativeNumbers.isEmpty()) return number;
+        if (restInput.length == 1) {
+            int number = ignoreNotIntegerNumbers(firstNumber);
+            if (negativeNumbers.isEmpty()) return number;
             throwException();
         }
         String[] rest = Arrays.copyOfRange(restInput, 1, restInput.length);
@@ -54,11 +57,11 @@ public class StringCalculator {
     }
 
     private void throwException() {
-        StringBuilder message= new StringBuilder();
-        for (int negativeNumber : negativeNumbers){
-            if(message.toString().equals("")){
+        StringBuilder message = new StringBuilder();
+        for (int negativeNumber : negativeNumbers) {
+            if (message.toString().equals("")) {
                 message = new StringBuilder("Negatives not allowed: " + negativeNumber);
-            }else {
+            } else {
                 message.append(", ").append(negativeNumber);
             }
         }

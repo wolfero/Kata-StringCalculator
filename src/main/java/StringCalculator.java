@@ -1,12 +1,14 @@
+import java.util.Arrays;
+
 public class StringCalculator {
-    private final String defaultSeparator=",";
+    private final String defaultSeparator=",|\\n";
 
     public int add(String input) {
         if (input.isEmpty()) return 0;
-        int firstSeparator = firstSeparatorIndex(input);
-        if (firstSeparator == -1) return ignoreNotIntegerNumbers(input);
         String[] splitInput = input.split(defaultSeparator);
-        return ignoreNotIntegerNumbers(splitInput[0]) + add(splitInput[1]);
+        String firstNumber=splitInput[0];
+        String[] rest= Arrays.copyOfRange(splitInput,1,splitInput.length);
+        return ignoreNotIntegerNumbers(firstNumber) + sum(rest);
     }
 
     private int firstSeparatorIndex(String input) {
@@ -19,6 +21,13 @@ public class StringCalculator {
         } catch (NumberFormatException e) {
             return 0;
         }
+    }
+
+    private  int sum(String[] restInput){
+        String firstNumber=restInput[0];
+        if(restInput.length==1)return ignoreNotIntegerNumbers(firstNumber);
+        String[] rest= Arrays.copyOfRange(restInput,1,restInput.length);
+        return ignoreNotIntegerNumbers(firstNumber) + sum(rest);
     }
 
 

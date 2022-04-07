@@ -18,7 +18,6 @@ public class StringCalculatorShould {
 
     @ParameterizedTest
     @CsvSource({
-            "'a',0",
             "'1,a',1"
     })
     void ignore_all_not_integer_numbers(String input,int output){

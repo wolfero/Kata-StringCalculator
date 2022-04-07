@@ -8,23 +8,27 @@ public class StringCalculator {
 
     public int add(String input) {
         if (input.isEmpty()) return 0;
-        input = extractCustomSeparator(input);
+        input = extractContentWhitoutSeparator(input);
         String[] splitInput = input.split(separator);
         String firstNumber = splitInput[0];
         String[] rest = Arrays.copyOfRange(splitInput, 1, splitInput.length);
         return ignoreNotIntegerNumbers(firstNumber) + sum(rest);
     }
 
-    private String extractCustomSeparator(String input) {
+    private String extractContentWhitoutSeparator(String input) {
         if (input.startsWith("//")) {
             String[] storage = input.split("\n");
-            separator = storage[0].substring(storage.length);
-            if (separator.matches("\\[(.+)\\]")) {
-                separator=separator.substring(1,separator.length()-1);
-            }
+            extractedCustomSeparator(storage);
             input = storage[1];
         }
         return input;
+    }
+
+    private void extractedCustomSeparator(String[] storage) {
+        separator = storage[0].substring(storage.length);
+        if (separator.matches("\\[(.+)\\]")) {
+            separator=separator.substring(1,separator.length()-1);
+        }
     }
 
     private int ignoreNotIntegerNumbers(String input) {

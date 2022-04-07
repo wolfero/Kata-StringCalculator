@@ -5,15 +5,20 @@ public class StringCalculator {
 
     public int add(String input) {
         if (input.isEmpty()) return 0;
-        if(input.startsWith("//")){
-            String[] splitedInput=input.split("\n");
-            separator=splitedInput[0].substring(splitedInput.length);
-            input=splitedInput[1];
-        }
+        input = extractCustomSeparator(input);
         String[] splitInput = input.split(separator);
         String firstNumber = splitInput[0];
         String[] rest = Arrays.copyOfRange(splitInput, 1, splitInput.length);
         return ignoreNotIntegerNumbers(firstNumber) + sum(rest);
+    }
+
+    private String extractCustomSeparator(String input) {
+        if(input.startsWith("//")){
+            String[] storage= input.split("\n");
+            separator=storage[0].substring(storage.length);
+            input =storage[1];
+        }
+        return input;
     }
 
     private int ignoreNotIntegerNumbers(String input) {

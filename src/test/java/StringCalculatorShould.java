@@ -5,6 +5,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StringCalculatorShould {
     private StringCalculator stringCalculator;
@@ -79,6 +80,11 @@ public class StringCalculatorShould {
     @Test
     void throw_exception_if_given_negative_number() {
         stringCalculator = new StringCalculator();
-        assertThrows(IllegalArgumentException.class, () -> stringCalculator.add("-1,2,-3"),"Negatives not allowed: -1, -3");
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> stringCalculator.add("-1,2,-3"));
+        String expectedMessage = "Negatives not allowed: -1, -3";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }

@@ -1,7 +1,10 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class StringCalculator {
     private String separator = "[,\\n]";
+    List<Integer> negativeNumbers= new ArrayList<>();
 
     public int add(String input) {
         if (input.isEmpty()) return 0;
@@ -23,7 +26,12 @@ public class StringCalculator {
 
     private int ignoreNotIntegerNumbers(String input) {
         try {
-            return Integer.parseInt(input);
+            int number=Integer.parseInt(input);
+            if(number<0) {
+                negativeNumbers.add(number);
+                return 0;
+            }
+            return number;
         } catch (NumberFormatException e) {
             return 0;
         }
@@ -31,7 +39,19 @@ public class StringCalculator {
 
     private int sum(String[] restInput) {
         String firstNumber = restInput[0];
-        if (restInput.length == 1) return ignoreNotIntegerNumbers(firstNumber);
+        if (restInput.length == 1){
+            int number=ignoreNotIntegerNumbers(firstNumber);
+            if(negativeNumbers.isEmpty()) return number;
+            String message="";
+            for (int negativeNumber : negativeNumbers){
+                if(message.equals("")){
+                    message="Negatives not allowed: "+ negativeNumber;
+                }else {
+                    message+=", "+negativeNumber;
+                }
+            }
+            throw new IllegalArgumentException(message);
+        }
         String[] rest = Arrays.copyOfRange(restInput, 1, restInput.length);
         return ignoreNotIntegerNumbers(firstNumber) + sum(rest);
     }

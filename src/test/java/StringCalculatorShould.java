@@ -114,7 +114,8 @@ public class StringCalculatorShould {
 
     @ParameterizedTest
     @CsvSource({
-            "'//[;][,]\\n1;2,3', 6"
+            "'//[;][,]\n1;2,3', 6",
+            "'//[-][%%]\n1-2%%3', 6"
     })
     void sum_the_numbers_separated_by_multiple_custom_delimiters_with_any_length(String input, int output) {
         stringCalculator = new StringCalculator();

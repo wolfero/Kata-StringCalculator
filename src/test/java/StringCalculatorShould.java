@@ -87,4 +87,16 @@ public class StringCalculatorShould {
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "'100,1002,1', 101"
+    })
+    void ignore_sum_if_given_number_is_greater_than_thousand(String input, int output) {
+        stringCalculator = new StringCalculator();
+
+        int result = stringCalculator.add(input);
+
+        assertThat(result).isEqualTo(output);
+    }
 }

@@ -61,4 +61,16 @@ public class StringCalculatorShould {
 
         assertThat(result).isEqualTo(output);
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "'//;\n1;2;3', 6"
+    })
+    void sum_the_numbers_separated_by_custom_delimiters(String input, int output) {
+        stringCalculator = new StringCalculator();
+
+        int result = stringCalculator.add(input);
+
+        assertThat(result).isEqualTo(output);
+    }
 }

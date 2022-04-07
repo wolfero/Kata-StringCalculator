@@ -1,11 +1,16 @@
 import java.util.Arrays;
 
 public class StringCalculator {
-    private final String defaultSeparator = ",|\\n";
+    private String separator = "[,\\n]";
 
     public int add(String input) {
         if (input.isEmpty()) return 0;
-        String[] splitInput = input.split(defaultSeparator);
+        if(input.startsWith("//")){
+            String[] splitedInput=input.split("\n");
+            separator=splitedInput[0].substring(splitedInput.length);
+            input=splitedInput[1];
+        }
+        String[] splitInput = input.split(separator);
         String firstNumber = splitInput[0];
         String[] rest = Arrays.copyOfRange(splitInput, 1, splitInput.length);
         return ignoreNotIntegerNumbers(firstNumber) + sum(rest);

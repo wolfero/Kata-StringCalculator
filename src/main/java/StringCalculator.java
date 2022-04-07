@@ -31,11 +31,15 @@ public class StringCalculator {
                 negativeNumbers.add(number);
                 return 0;
             }
-            if(number>1000)return 0;
-            return number;
+            return checkIfIsGreaterThanThousand(number);
         } catch (NumberFormatException e) {
             return 0;
         }
+    }
+
+    private int checkIfIsGreaterThanThousand(int number) {
+        if(number >1000) return 0;
+        return number;
     }
 
     private int sum(String[] restInput) {

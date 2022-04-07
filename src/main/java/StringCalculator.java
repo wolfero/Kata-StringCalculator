@@ -31,6 +31,7 @@ public class StringCalculator {
                 negativeNumbers.add(number);
                 return 0;
             }
+            if(number>1000)return 0;
             return number;
         } catch (NumberFormatException e) {
             return 0;

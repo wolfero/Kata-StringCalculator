@@ -32,7 +32,7 @@ public class StringCalculatorShould {
     @ParameterizedTest
     @CsvSource({
             "'1,2',3",
-            "'1,2,1',3"
+            "'1,2,1',4"
     })
     void sum_the_numbers_separated_by_commas(String input,int output){
         StringCalculator stringCalculator = new StringCalculator();
@@ -45,7 +45,7 @@ public class StringCalculatorShould {
     @ParameterizedTest
     @CsvSource({
             "'1\n2',3",
-            "'1,2\n1',3"
+            "'1,2\n1',4"
     })
     void sum_the_numbers_separated_by_commas_and_new_lines(String input,int output){
         StringCalculator stringCalculator = new StringCalculator();

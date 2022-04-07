@@ -18,21 +18,25 @@ public class StringCalculator {
     private String extractContentWithoutSeparator(String input) {
         if (input.startsWith("//")) {
             String[] storage = input.split("\n");
-            extractedCustomSeparator(storage);
+            selectCustomSeparator(storage);
             input = storage[1];
         }
         return input;
     }
 
-    private void extractedCustomSeparator(String[] storage) {
+    private void selectCustomSeparator(String[] storage) {
         separator = storage[0].substring(storage.length);
         if (separator.matches("\\[(.+)\\]")) {
             separator = separator.substring(1, separator.length() - 1);
-            int toSplitSeparators = separator.indexOf("][");
-            if (toSplitSeparators != -1) {
-                String firstSeparator = separator.substring(0, toSplitSeparators);
-                separator = firstSeparator + "|" + separator.substring(toSplitSeparators + 2);
-            }
+            selectMultipleSeparators();
+        }
+    }
+
+    private void selectMultipleSeparators() {
+        int toSplitSeparators = separator.indexOf("][");
+        if (toSplitSeparators != -1) {
+            String firstSeparator = separator.substring(0, toSplitSeparators);
+            separator = firstSeparator + "|" + separator.substring(toSplitSeparators + 2);
         }
     }
 
@@ -76,6 +80,4 @@ public class StringCalculator {
         }
         throw new IllegalArgumentException(message.toString());
     }
-
-
 }

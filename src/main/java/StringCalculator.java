@@ -3,19 +3,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StringCalculator {
-    private String separator = "[,\\n]";
-    List<Integer> negativeNumbers = new ArrayList<>();
+    public int add(String expression) {
+        if (expression.isEmpty()) return 0;
 
-    public int add(String input) {
-        if (input.isEmpty()) return 0;
-        input = extractContentWithoutSeparator(input);
-        String[] splitInput = input.split(separator);
+        expression = extractExpression(expression);
+        String[] splitInput = expression.split(separator);
         String firstNumber = splitInput[0];
         String[] rest = Arrays.copyOfRange(splitInput, 1, splitInput.length);
         return ignoreNotIntegerNumbers(firstNumber) + sum(rest);
     }
 
-    private String extractContentWithoutSeparator(String input) {
+    private String extractExpression(String input) {
         if (input.startsWith("//")) {
             String[] storage = input.split("\n");
             selectCustomSeparator(storage);
@@ -24,6 +22,7 @@ public class StringCalculator {
         return input;
     }
 
+    private String separator = "[,\\n]";
     private void selectCustomSeparator(String[] storage) {
         separator = storage[0].substring(storage.length);
         if (separator.matches("\\[(.+)\\]")) {
@@ -40,11 +39,12 @@ public class StringCalculator {
         }
     }
 
+    List<String> negativeNumbers = new ArrayList<>();
     private int ignoreNotIntegerNumbers(String input) {
         try {
             int number = Integer.parseInt(input);
             if (number < 0) {
-                negativeNumbers.add(number);
+                negativeNumbers.add(input);
                 return 0;
             }
             return checkIfIsGreaterThanThousand(number);
@@ -63,6 +63,7 @@ public class StringCalculator {
         if (restInput.length == 1) {
             int number = ignoreNotIntegerNumbers(firstNumber);
             if (negativeNumbers.isEmpty()) return number;
+
             throwException();
         }
         String[] rest = Arrays.copyOfRange(restInput, 1, restInput.length);
@@ -70,14 +71,8 @@ public class StringCalculator {
     }
 
     private void throwException() {
-        StringBuilder message = new StringBuilder();
-        for (int negativeNumber : negativeNumbers) {
-            if (message.toString().equals("")) {
-                message = new StringBuilder("Negatives not allowed: " + negativeNumber);
-            } else {
-                message.append(", ").append(negativeNumber);
-            }
-        }
-        throw new IllegalArgumentException(message.toString());
+        String messageNumbers = String.join(",",negativeNumbers);
+        String message = "Negatives not allowed: "+messageNumbers;
+        throw new IllegalArgumentException(message);
     }
 }

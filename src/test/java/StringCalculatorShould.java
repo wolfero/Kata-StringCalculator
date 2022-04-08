@@ -20,11 +20,7 @@ public class StringCalculatorShould {
             "'',0"
     })
     void return_zero_if_given_empty_string(String input, int output) {
-        stringCalculator = new StringCalculator();
-
-        int result = stringCalculator.add(input);
-
-        assertThat(result).isEqualTo(output);
+        assertThat(stringCalculator.add(input)).isEqualTo(output);
     }
 
     @ParameterizedTest
@@ -32,11 +28,7 @@ public class StringCalculatorShould {
             "'1,a',1"
     })
     void ignore_all_not_integer_numbers(String input, int output) {
-        stringCalculator = new StringCalculator();
-
-        int result = stringCalculator.add(input);
-
-        assertThat(result).isEqualTo(output);
+        assertThat(stringCalculator.add(input)).isEqualTo(output);
     }
 
     @ParameterizedTest
@@ -45,11 +37,7 @@ public class StringCalculatorShould {
             "'1,2,1',4"
     })
     void sum_the_numbers_separated_by_commas(String input, int output) {
-        stringCalculator = new StringCalculator();
-
-        int result = stringCalculator.add(input);
-
-        assertThat(result).isEqualTo(output);
+        assertThat(stringCalculator.add(input)).isEqualTo(output);
     }
 
     @ParameterizedTest
@@ -58,11 +46,7 @@ public class StringCalculatorShould {
             "'1,2\n1',4"
     })
     void sum_the_numbers_separated_by_commas_and_new_lines(String input, int output) {
-        stringCalculator = new StringCalculator();
-
-        int result = stringCalculator.add(input);
-
-        assertThat(result).isEqualTo(output);
+        assertThat(stringCalculator.add(input)).isEqualTo(output);
     }
 
     @ParameterizedTest
@@ -70,19 +54,13 @@ public class StringCalculatorShould {
             "'//;\n1;2;3', 6"
     })
     void sum_the_numbers_separated_by_custom_delimiters(String input, int output) {
-        stringCalculator = new StringCalculator();
-
-        int result = stringCalculator.add(input);
-
-        assertThat(result).isEqualTo(output);
+        assertThat(stringCalculator.add(input)).isEqualTo(output);
     }
 
     @Test
-    void throw_exception_if_given_negative_number() {
-        stringCalculator = new StringCalculator();
-
+    void negative_number_not_allowed() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> stringCalculator.add("-1,2,-3"));
-        String expectedMessage = "Negatives not allowed: -1, -3";
+        String expectedMessage = "Negatives not allowed: -1,-3";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
@@ -93,11 +71,7 @@ public class StringCalculatorShould {
             "'100,1002,1', 101"
     })
     void ignore_sum_if_given_number_is_greater_than_thousand(String input, int output) {
-        stringCalculator = new StringCalculator();
-
-        int result = stringCalculator.add(input);
-
-        assertThat(result).isEqualTo(output);
+        assertThat(stringCalculator.add(input)).isEqualTo(output);
     }
 
     @ParameterizedTest
@@ -105,11 +79,7 @@ public class StringCalculatorShould {
             "'//[;;;]\n1;;;2;;;3', 6"
     })
     void sum_the_numbers_separated_by_custom_delimiters_with_any_length(String input, int output) {
-        stringCalculator = new StringCalculator();
-
-        int result = stringCalculator.add(input);
-
-        assertThat(result).isEqualTo(output);
+        assertThat(stringCalculator.add(input)).isEqualTo(output);
     }
 
     @ParameterizedTest
@@ -118,10 +88,6 @@ public class StringCalculatorShould {
             "'//[-][%%]\n1-2%%3', 6"
     })
     void sum_the_numbers_separated_by_multiple_custom_delimiters_with_any_length(String input, int output) {
-        stringCalculator = new StringCalculator();
-
-        int result = stringCalculator.add(input);
-
-        assertThat(result).isEqualTo(output);
+        assertThat(stringCalculator.add(input)).isEqualTo(output);
     }
 }
